@@ -39,19 +39,19 @@ class MainWindow(QObject):
 
 def displayForcast():
     tempLabel = self.window.finsChild(QLabel, 'tempLabel')
-    tempLabel.setText(f'Temperature: {temp}')
+    tempLabel.setText(f'Temperature: [temp]')
     tempLabel.repaint()
 
     conditionsLabel = self.window.finsChild(QLabel, 'conditionsLabel')
-    conditionsLabel.setText(f'Conditions: {desc}')
+    conditionsLabel.setText(f'Conditions: [desc]')
     conditionsLabel.repaint()
 
     humidityLabel = self.window.finsChild(QLabel, 'humidityLabel')
-    humidityLabel.setText(f'Humidity: {humidty}')
+    humidityLabel.setText(f'Humidity: [humidty]')
     humidityLabel.repaint()
 
     windLabel = self.window.finsChild(QLabel, 'windLabel')
-    windLabel.setText(f'Windspeed: {wind}')
+    windLabel.setText(f'Windspeed: [wind]')
     windLabel.repaint()
 
 
