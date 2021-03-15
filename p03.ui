@@ -36,7 +36,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="ImputCityNameEdit"/>
+            <widget class="QLineEdit" name="cityNameEdit"/>
            </item>
           </layout>
          </item>
@@ -54,7 +54,7 @@
          <item row="0" column="0">
           <widget class="QLabel" name="tempLabel">
            <property name="text">
-            <string>Temperature:</string>
+            <string>Tempature:</string>
            </property>
           </widget>
          </item>

@@ -32,48 +32,46 @@ class MainWindow(QObject):
 
         #event listeners
         forcastButton = self.window.findChild(QPushButton, 'forcastButton')
- #       forcastButton.clicked.connect(self.forcastButtonClicked)
+        forcastButton.clicked.connect(self.forcastButtonClicked)
 
-def getForcast(self):
+    def getForcast(self):
         #user input is city
         city = self.window.findChild(QLineEdit, 'cityNameEdit')
 
         #grabbing data
         URL = f'http://api.openweathermap.org/data/2.5/weather?q={city}&appid=c9d2df339b7b3c75acaf8cc63ca58d18&units=imperial'
         r = requests.get(URL)
-        forcast = r.json()
 
-        name = forcast['name']
-        country = forcast['sys']['country']
+        forcast = r.json()
+        '''
         temp = forcast['main']['temp']
         wind = forcast['wind']['speed']
         desc = forcast['weather'][0]['description']
         humidty = forcast['main']['humidity']
-
-        self.deisplayForcast()
-
-
-def displayForcast(self):
-    tempLabel = self.window.findChild(QLabel, 'tempLabel')
-    tempLabel.getForcast.setText('Temperature: {temp}')
-    tempLabel.repaint()
-
-    conditionsLabel = self.window.findChild(QLabel, 'conditionsLabel')
-    conditionsLabel.setText('Conditions: {desc}')
-    conditionsLabel.repaint()
-
-    humidityLabel = self.window.findChild(QLabel, 'humidityLabel')
-    humidityLabel.setText('Humidity: {humidty}')
-    humidityLabel.repaint()
-
-    windLabel = self.window.findChild(QLabel, 'windLabel')
-    windLabel.setText('Windspeed: {wind}')
-    windLabel.repaint()
+        '''
+        self.displayForcast()
 
 
-def forcastButtonClicked(self):
-    print('zeus is gathering the forcast...')
-    self.getForcast()
+    def displayForcast(self):
+        #doesn display data yet
+        tempLabel = self.window.findChild(QLabel, 'tempLabel')
+        tempLabel.setText('Temperature: {main}{temp}')
+
+        conditionsLabel = self.window.findChild(QLabel, 'conditionsLabel')
+        conditionsLabel.setText('Conditions: {desc}')
+        
+
+        humidityLabel = self.window.findChild(QLabel, 'humidityLabel')
+        humidityLabel.setText('Humidity: {humidty}')
+        
+        windLabel = self.window.findChild(QLabel, 'windLabel')
+        windLabel.setText('Windspeed: {wind}')
+        
+
+
+    def forcastButtonClicked(self):
+        print('zeus is gathering the forcast...')
+        self.getForcast()
 
 
 
