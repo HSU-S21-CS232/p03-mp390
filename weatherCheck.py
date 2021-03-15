@@ -11,7 +11,7 @@ from PySide2.QtCore import QFile, QObject
 class MainWindow(QObject):
 
     #constructor
-    def __init__(self, ui_file = p03.ui, parent=None):
+    def __init__(self, ui_file='p03.ui', parent=None):
 
         #call class parent (QObject) constructor
         super(MainWindow, self).__init__(parent)
@@ -29,10 +29,11 @@ class MainWindow(QObject):
         #show window to the user
         self.window.show()
 
+'''
         #event listeners
         forcastButton = self.window.findChild(QPushButton, 'forcastButton')
         forcastButton.clicked.connect(self.forcastButtonClicked)
-
+'''
 #def getForcast():
 
 
@@ -55,10 +56,11 @@ def displayForcast():
     windLabel.repaint()
 
 
+#def forcastButtonClicked():
 
 
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    main_window = MainWindow(p03.ui)
+    main_window = MainWindow('p03.ui')
     sys.exit(app.exec_())
