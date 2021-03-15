@@ -1,10 +1,10 @@
 
 import sys
-import weatherCheckInfo
 from PySide2.QtUiTools import QUiLoader #allows us to load .ui files
-from PySide2.QtWidgets import QApplication, QLineEdit, QPushButton, QLabel # import widgets I use, this is just an example
-
+from PySide2.QtWidgets import QApplication, QMainWindow, QLineEdit, QPushButton, QLabel # import widgets I use, this is just an example
 from PySide2.QtCore import QFile, QObject
+
+import requests
 
 #in C++
 #class MainWindow: public QObject
@@ -29,34 +29,51 @@ class MainWindow(QObject):
         #show window to the user
         self.window.show()
 
-'''
+
         #event listeners
         forcastButton = self.window.findChild(QPushButton, 'forcastButton')
-        forcastButton.clicked.connect(self.forcastButtonClicked)
-'''
-#def getForcast():
+ #       forcastButton.clicked.connect(self.forcastButtonClicked)
+
+def getForcast(self):
+        #user input is city
+        city = self.window.findChild(QLineEdit, 'cityNameEdit')
+
+        #grabbing data
+        URL = f'http://api.openweathermap.org/data/2.5/weather?q={city}&appid=c9d2df339b7b3c75acaf8cc63ca58d18&units=imperial'
+        r = requests.get(URL)
+        forcast = r.json()
+
+        name = forcast['name']
+        country = forcast['sys']['country']
+        temp = forcast['main']['temp']
+        wind = forcast['wind']['speed']
+        desc = forcast['weather'][0]['description']
+        humidty = forcast['main']['humidity']
+
+        self.deisplayForcast()
 
 
-
-def displayForcast():
-    tempLabel = self.window.finsChild(QLabel, 'tempLabel')
-    tempLabel.setText(f'Temperature: [temp]')
+def displayForcast(self):
+    tempLabel = self.window.findChild(QLabel, 'tempLabel')
+    tempLabel.getForcast.setText('Temperature: {temp}')
     tempLabel.repaint()
 
-    conditionsLabel = self.window.finsChild(QLabel, 'conditionsLabel')
-    conditionsLabel.setText(f'Conditions: [desc]')
+    conditionsLabel = self.window.findChild(QLabel, 'conditionsLabel')
+    conditionsLabel.setText('Conditions: {desc}')
     conditionsLabel.repaint()
 
-    humidityLabel = self.window.finsChild(QLabel, 'humidityLabel')
-    humidityLabel.setText(f'Humidity: [humidty]')
+    humidityLabel = self.window.findChild(QLabel, 'humidityLabel')
+    humidityLabel.setText('Humidity: {humidty}')
     humidityLabel.repaint()
 
-    windLabel = self.window.finsChild(QLabel, 'windLabel')
-    windLabel.setText(f'Windspeed: [wind]')
+    windLabel = self.window.findChild(QLabel, 'windLabel')
+    windLabel.setText('Windspeed: {wind}')
     windLabel.repaint()
 
 
-#def forcastButtonClicked():
+def forcastButtonClicked(self):
+    print('zeus is gathering the forcast...')
+    self.getForcast()
 
 
 
@@ -64,3 +81,16 @@ if __name__ == '__main__':
     app = QApplication(sys.argv)
     main_window = MainWindow('p03.ui')
     sys.exit(app.exec_())
+
+
+
+
+
+'''        print(name, ",", country, sep="")
+        print('The tempature is: ',temp, 'F', sep="")
+        print('The humidity percentage is: ', humidty, '%', sep="")
+        print('The wind is blowing at: ', wind,'mph', sep="")
+        print('The forcast is described as:', desc)
+        print('The sunrise will happen at:', sunrise)
+        print('The sunset will happen at:', sunset)
+        '''
